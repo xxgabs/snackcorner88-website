@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Semua Produk — SnackCorner88</title>
+  <title>Products — SnackCorner88</title>
   <meta name="description" content="Discover sweet, crunchy, refreshing, and fun snacks curated
             by SnackCorner88. Find your next favorite treat and shop
             directly through our marketplace stores.">
@@ -513,11 +513,11 @@
         activeCategory === "all" || product.category === activeCategory
       );
 
-      resultCount.textContent = `${entries.length} produk ditemukan`;
+      resultCount.textContent = `${entries.length} Products Found`;
 
       grid.innerHTML = entries.length
         ? entries.map(([slug, product]) => productCardHtml(slug, product)).join("")
-        : `<div class="empty-state">Belum ada produk di kategori ini.</div>`;
+        : `<div class="empty-state">There are no products in this category yet.</div>`;
     }
 
     renderFilters();
