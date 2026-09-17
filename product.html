@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Products — SnackCorner88</title>
+  <meta name="description" content="SnackCorner88 Product — description, variant, and link.">
+
+  <link rel="icon" type="image/png" href="/assets/brand/snackcorner88-logo.png">
+  <link rel="apple-touch-icon" href="/assets/brand/snackcorner88-logo.png">
+
+  <style>
+    :root {
+      --blue: #086DDC;
+      --blue-dark: #0755aa;
+      --yellow: #FBD122;
+      --navy: #0B1F3A;
+      --text: #172033;
+      --muted: #687386;
+      --bg: #F8FAFC;
+      --white: #FFFFFF;
+      --border: #E8EDF4;
+      --success: #168A55;
+      --danger: #D94848;
+      --shadow: 0 12px 35px rgba(11, 31, 58, 0.08);
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+
+    /* NAVBAR (matches index.html) */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(232, 237, 244, 0.9);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      min-height: 88px;
+      margin: auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand img {
+      display: block;
+      width: 165px;
+      height: 64px;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover { color: var(--blue); }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: var(--navy);
+      color: white;
+      font-size: 13px;
+      font-weight: 800;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav-cta:hover { background: var(--blue); transform: translateY(-2px); }
+
+    @media (max-width: 980px) {
+      .nav-links, .nav-cta { display: none; }
+    }
+
+    /* BREADCRUMB */
+    .breadcrumb {
+      max-width: 1200px;
+      margin: auto;
+      padding: 22px 24px 0;
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .breadcrumb a:hover { color: var(--blue); }
+
+    .breadcrumb span.sep { margin: 0 6px; color: #C4CDDA; }
+
+    .breadcrumb .current { color: var(--navy); }
+
+    /* PRODUCT DETAIL */
+    .detail {
+      max-width: 1200px;
+      margin: auto;
+      padding: 24px 24px 90px;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .detail-image {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      border-radius: 24px;
+      background: linear-gradient(145deg, #edf5ff, #fff8d9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 10px;
+    }
+
+    .detail-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .detail-image .badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-new { background: var(--yellow); color: var(--navy); }
+    .badge-out { background: #FDEAEA; color: var(--danger); }
+
+    .detail-info .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: #EAF3FF;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .detail-info h1 {
+      color: var(--navy);
+      font-size: clamp(28px, 4vw, 40px);
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .detail-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 22px;
+    }
+
+    .detail-status.available { color: var(--success); }
+    .detail-status.out { color: var(--danger); }
+
+    .detail-status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .detail-description {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 30px;
+      max-width: 520px;
+    }
+
+    .detail-section-title {
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .variant-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 34px;
+    }
+
+    .variant-chip {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1.5px solid var(--border);
+      background: white;
+      font-size: 13px;
+      font-weight: 750;
+      color: var(--navy);
+    }
+
+    .detail-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 22px;
+      border-radius: 13px;
+      font-weight: 800;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-shopee {
+      background: #EE4D2D;
+      color: white;
+      box-shadow: 0 10px 24px rgba(238, 77, 45, 0.25);
+    }
+
+    .btn-shopee:hover { background: #d43f22; transform: translateY(-2px); }
+
+    .btn-shopee img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      background: white;
+      border-radius: 5px;
+      padding: 2px;
+    }
+
+    .btn-disabled {
+      background: #EEF1F5;
+      color: var(--muted);
+      cursor: not-allowed;
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--navy);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
+
+    .detail-note {
+      margin-top: 18px;
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+
+    /* Empty state, shown if slug doesn't match any product */
+    .not-found {
+      max-width: 620px;
+      margin: 90px auto;
+      text-align: center;
+      padding: 0 24px;
+    }
+
+    .not-found h1 {
+      color: var(--navy);
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    .not-found p {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #07172B;
+      color: white;
+      margin-top: 40px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      color: #9DABC0;
+      font-size: 13px;
+    }
+
+    @media (max-width: 820px) {
+      .detail-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="brand" aria-label="SnackCorner88 Home">
+        <img src="/assets/brand/snackcorner88-logo.png" alt="SnackCorner88 official logo" loading="eager">
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html#home">Home</a>
+        <a href="products.html">Products</a>
+        <a href="index.html#why-us">Why Us</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+
+      <a class="nav-cta" href="products.html">Shop Snacks</a>
+    </div>
+  </header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="index.html">Home</a>
+    <span class="sep">/</span>
+    <a href="products.html">Products</a>
+    <span class="sep">/</span>
+    <span class="current" id="breadcrumbCurrent">Product Detail</span>
+  </nav>
+
+  <main id="detailRoot">
+    <!-- Content is injected by JavaScript based on ?slug= in the URL -->
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>© 2026 SnackCorner88. All rights reserved.</span>
+      <a href="index.html">Back To Home</a>
+    </div>
+  </footer>
+
+  <script>
+    /* =========================================================
+       PRODUCT DATABASE
+       Tambah / edit produk di sini. "slug" HARUS sama persis
+       dengan yang dipakai di href="product.html?slug=..." pada
+       index.html / products.html.
+    ========================================================== */
+    const PRODUCTS = {
+      "candy": {
+        name: "Dancing Pop",
+        image: "/assets/products/dancingpop.png",
+        badge: null,              // "new" | "out" | null
+        available: true,
+        description:
+          "Dancing Pop is a fun and exciting popping candy snack made for those who love a unique candy experience. With its colorful appearance and playful popping sensation, Dancing Pop brings extra fun to every bite.Perfect as a casual snack, party treat, or fun candy to enjoy with friends and family. Whether you're looking for a colorful candy snack or something different from ordinary sweets, Dancing Pop is a fun choice for every occasion.",
+        variants: ["Original"],
+        shopeeUrl: "https://shopee.co.id/product/1855086980/50664843376/"
+      },
+      "chocolate": {
+        name: "BeBe Chocolate Coin",
+        image: "/assets/products/bebecoin.png",
+        badge: null,
+        available: true,
+        description:
+          "BeBe Chocolate Coin is a fun and delicious chocolate candy featuring a playful coin-shaped design. Its sweet chocolate flavor makes it an enjoyable treat for everyday snacking, sharing with friends, or adding a little sweetness to special moments. With its unique coin shape and delicious chocolate taste, BeBe Chocolate Coin is a fun choice for chocolate lovers looking for an enjoyable and convenient sweet snack.",
+        variants: ["Original"],
+        shopeeUrl: "https://shopee.co.id/product/1855086980/52464828681/"
+      },
+      "instantfood": {
+        name: "Mie Instan Jago Mie",
+        image: "/assets/products/miejago.png",
+        badge: null,
+        available: true,
+        description:
+          "Jago Mie Instant Noodles is a convenient and delicious noodle snack that's easy to prepare whenever you're craving a quick meal. With its flavorful seasoning and satisfying noodle texture, Jago Mie is a practical choice for everyday meals and snacks. Easy to cook and enjoyable at any time of the day, Jago Mie Instant Noodles is perfect for students, busy individuals, or anyone looking for a simple and tasty noodle meal.",
+        variants: ["Soto Ayam", "Kaldu Ayam", "Bakso Spesial"],
+        shopeeUrl: "https://shopee.co.id/product/1855086980/56265150523/"
+      },
+      "chocolate2": {
+        name: "Zippy Mini Manis",
+        image: "/assets/products/zippymini.png",
+        available: true,
+        description:
+          "Zippy Mini Manis is a sweet and fun mini candy snack made for enjoyable everyday moments. Its small and convenient size makes it easy to enjoy on the go, share with friends, or keep as a simple sweet treat. Perfect for candy lovers looking for a tasty snack, Zippy Mini Manis brings a little sweetness to your day with every bite.",
+        variants: ["Original"],
+        shopeeUrl: "https://shopee.co.id/product/1855086980/52464828681/"
+      },
+      "chocolate3": {
+        name: "DeLatto Biscuit Ball",
+        image: "/assets/products/delatto1.png",
+        available: true,
+        description:
+         "DeLatto Biscuit Ball is a crunchy and delicious biscuit snack with a fun ball-shaped design. Its satisfying texture and sweet flavor make it a tasty choice for everyday snacking. Perfect to enjoy on its own, share with friends and family, or take along as a convenient snack, DeLatto Biscuit Ball adds a fun twist to your everyday biscuit treat.",
+        variants: ["Original"],
+        shopeeUrl: "https://shopee.co.id/product/1855086980/55214999911/"
+      },
+      "savory": {
+        name: "Kepang Goreng",
+        image: "/assets/products/kepanggoreng.png",
+        available: true,
+        description:
+          "Kepang Goreng is a crunchy and savory traditional fried snack with a distinctive braided shape. Its crispy texture and savory flavor make it a delicious choice for everyday snacking. Perfect to enjoy on its own, share with family and friends, or serve as a tasty snack for various occasions. Kepang Goreng offers a simple yet satisfying traditional snack experience in every bite.",
+        variants: ["Daun Jeruk","Sapi Panggang"],
+        shopeeUrl: "https://shopee.co.id/product/1855086980/55214999911/"
+      },
+       "candy2": {
+        name: "Parago Chewy Candy",
+        image: "/assets/products/paragochewy.png",
+        available: true,
+        description:
+          "Parago Chewy Candy is a soft and chewy candy made for enjoyable snacking moments. With its sweet and fruity taste and satisfying chewy texture, Parago is a fun treat for candy lovers of all ages. Convenient to enjoy anytime, Parago Chewy Candy is perfect for a quick sweet treat, sharing with friends and family, or keeping as an everyday snack.",
+        variants: ["Milk","Fruity"],
+        shopeeUrl: "https://shopee.co.id/product/1855086980/41933134816/"
+      },
+    };
+
+    function renderProduct() {
+      const params = new URLSearchParams(window.location.search);
+      const slug = params.get("slug");
+      const product = slug ? PRODUCTS[slug] : null;
+      const root = document.getElementById("detailRoot");
+      const breadcrumbCurrent = document.getElementById("breadcrumbCurrent");
+
+      if (!product) {
+        document.title = "Produk Tidak Ditemukan — SnackCorner88";
+        breadcrumbCurrent.textContent = "Produk Tidak Ditemukan";
+        root.innerHTML = `
+          <div class="not-found">
+            <h1>Produk tidak ditemukan</h1>
+            <p>Sepertinya link produk ini tidak valid atau sudah tidak tersedia.</p>
+            <a class="btn btn-secondary" href="products.html">Lihat Semua Produk</a>
+          </div>
+        `;
+        return;
+      }
+
+      document.title = product.name + " — SnackCorner88";
+      breadcrumbCurrent.textContent = product.name;
+
+      const badgeHtml = product.badge === "new"
+        ? '<span class="badge badge-new">New Stock</span>'
+        : product.badge === "out"
+          ? '<span class="badge badge-out">Out of Stock</span>'
+          : "";
+
+      const imageHtml = product.image
+        ? `<img src="${product.image}" alt="${product.name}">`
+        : `<span style="color:var(--navy);opacity:.55;font-weight:900;font-size:15px;text-align:center;">PRODUCT IMAGE</span>`;
+
+      const variantsHtml = product.variants
+        .map(v => `<span class="variant-chip">${v}</span>`)
+        .join("");
+
+      const statusHtml = product.available
+        ? '<div class="detail-status available">Available</div>'
+        : '<div class="detail-status out">Out of Stock</div>';
+
+      const shopeeButtonHtml = product.available
+        ? `<a class="btn btn-shopee" href="${product.shopeeUrl}" target="_blank" rel="noopener" aria-label="Beli ${product.name} di Shopee">
+             <img src="/assets/brand/shopee-logo.png" alt="">
+             Buy on Shopee
+           </a>`
+        : `<span class="btn btn-disabled">Out of Stock</span>`;
+
+      root.innerHTML = `
+        <div class="detail">
+          <div class="detail-grid">
+
+            <div class="detail-image">
+              ${badgeHtml}
+              ${imageHtml}
+            </div>
+
+            <div class="detail-info">
+              <div class="eyebrow">SnackCorner88</div>
+              <h1>${product.name}</h1>
+              ${statusHtml}
+
+              <p class="detail-description">${product.description}</p>
+
+              <div class="detail-section-title">Available Variant</div>
+              <div class="variant-list">${variantsHtml}</div>
+
+              <div class="detail-actions">
+                ${shopeeButtonHtml}
+                <a class="btn btn-secondary" href="products.html">← Back to Products</a>
+              </div>
+
+              <p class="detail-note">
+                Prices and variant availability follow the official listings on Shopee.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      `;
+    }
+
+    renderProduct();
+  </script>
+
+</body>
+</html>

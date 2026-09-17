@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>SnackCorner88 — Your Favorite Snacks</title>
+  <meta name="description" content="SnackCorner88 — Your favorite snacks, sweets, and treats in one place.">
+
+  <!-- SnackCorner88 official logo as favicon -->
+  <link rel="icon" type="image/png" href="/assets/brand/snackcorner88-logo.png">
+  <link rel="apple-touch-icon" href="/assets/brand/snackcorner88-logo.png">
+
+  <style>
+    :root {
+      --blue: #086DDC;
+      --blue-dark: #0755aa;
+      --yellow: #FBD122;
+      --navy: #0B1F3A;
+      --text: #172033;
+      --muted: #687386;
+      --bg: #F8FAFC;
+      --white: #FFFFFF;
+      --border: #E8EDF4;
+      --success: #168A55;
+      --danger: #D94848;
+      --shadow: 0 12px 35px rgba(11, 31, 58, 0.08);
+      --radius: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(232, 237, 244, 0.9);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      min-height: 88px;
+      margin: auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .brand img {
+      display: block;
+      width: 165px;
+      height: 64px;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .nav-links a {
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--blue);
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: var(--navy);
+      color: white;
+      font-size: 13px;
+      font-weight: 800;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .nav-cta:hover {
+      background: var(--blue);
+      transform: translateY(-2px);
+    }
+
+    .mobile-toggle {
+      display: none;
+      border: 0;
+      background: var(--navy);
+      color: white;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 90% 15%, rgba(251, 209, 34, 0.28), transparent 28%),
+        radial-gradient(circle at 10% 80%, rgba(8, 109, 220, 0.14), transparent 30%),
+        linear-gradient(135deg, #ffffff 0%, #f4f8fd 100%);
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      min-height: 570px;
+      margin: auto;
+      padding: 82px 24px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: #EAF3FF;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--yellow);
+    }
+
+    .hero h1 {
+      max-width: 680px;
+      color: var(--navy);
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 0.98;
+      letter-spacing: -3px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span {
+      color: var(--blue);
+    }
+
+    .hero p {
+      max-width: 570px;
+      color: var(--muted);
+      font-size: 17px;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 20px;
+      border-radius: 13px;
+      font-weight: 800;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: white;
+      box-shadow: 0 10px 24px rgba(8, 109, 220, 0.22);
+    }
+
+    .btn-primary:hover {
+      background: var(--blue-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--navy);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      transform: translateY(-2px);
+    }
+
+    .hero-logo-card {
+      min-height: 370px;
+      border-radius: 34px;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 35px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(11, 31, 58, 0.18);
+    }
+
+    .hero-logo-card::before,
+    .hero-logo-card::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-logo-card::before {
+      width: 260px;
+      height: 260px;
+      background: rgba(8, 109, 220, 0.18);
+      top: -100px;
+      right: -60px;
+    }
+
+    .hero-logo-card::after {
+      width: 180px;
+      height: 180px;
+      background: rgba(251, 209, 34, 0.13);
+      bottom: -80px;
+      left: -50px;
+    }
+
+    .hero-logo-card img {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 390px);
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* =========================
+       SECTION
+    ========================== */
+    section {
+      padding: 88px 24px;
+    }
+
+    .section-inner {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 30px;
+      margin-bottom: 35px;
+    }
+
+    .section-heading h2 {
+      color: var(--navy);
+      font-size: clamp(30px, 4vw, 44px);
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+    }
+
+    .section-heading p {
+      max-width: 450px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .section-heading-actions {
+      max-width: 470px;
+    }
+
+    .section-heading-actions p {
+      max-width: none;
+    }
+
+    .view-all-link {
+      display: inline-flex;
+      margin-top: 12px;
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 850;
+    }
+
+    .view-all-link {
+      gap: 8px;
+    }
+
+    .view-all-link .arrow-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+
+    .view-all-link:hover .arrow-icon {
+      transform: translateX(4px);
+    }
+
+    .view-all-link:hover {
+      color: var(--navy);
+      text-decoration: underline;
+    }
+
+    /* =========================
+       PRODUCTS
+    ========================== */
+    .products {
+      background: white;
+    }
+
+    .filter-row {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 28px;
+    }
+
+    .filter {
+      white-space: nowrap;
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .filter.active,
+    .filter:hover {
+      background: var(--navy);
+      color: white;
+      border-color: var(--navy);
+    }
+
+    .product-preview-section {
+      width: 100%;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .product-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    /* ---- Product image box: ratio matches portrait photos (1600x2400 = 2:3),
+       so real photos fill the box nicely instead of floating small in the middle ---- */
+    .product-image {
+      aspect-ratio: 2 / 3;
+      border-radius: 15px;
+      background: linear-gradient(145deg, #edf5ff, #fff8d9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--navy);
+      font-weight: 900;
+      font-size: 15px;
+      margin-bottom: 15px;
+      text-align: center;
+      padding: 8px;
+      overflow: hidden;
+    }
+
+    .product-image span {
+      opacity: 0.55;
+    }
+
+    /* Actual product photos (e.g. 1000x1000px source) scale to fit the box
+       without stretching or overflowing, regardless of the original size */
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+    }
+
+    .badge {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      z-index: 2;
+      padding: 6px 9px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-new {
+      background: var(--yellow);
+      color: var(--navy);
+    }
+
+    .badge-out {
+      background: #FDEAEA;
+      color: var(--danger);
+    }
+
+    .product-card h3 {
+      font-size: 16px;
+      color: var(--navy);
+      margin-bottom: 5px;
+    }
+
+    .product-card p {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    /* Clickable area of the card (image + title + short text) that opens
+       the product detail page. Kept separate from .product-footer so the
+       Shopee icon link below is never nested inside another <a>. */
+    .product-card-link {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .product-card-link:hover h3 {
+      color: var(--blue);
+    }
+
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .marketplace-links {
+      display: flex;
+      gap: 7px;
+    }
+
+    .marketplace {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: white;
+      border: 1px solid var(--border);
+      padding: 6px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .marketplace:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(11, 31, 58, 0.12);
+    }
+
+    .marketplace img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .product-status {
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .status-available {
+      color: var(--success);
+    }
+
+    .status-out {
+      color: var(--danger);
+    }
+
+    /* =========================
+       BRAND / FEATURES
+    ========================== */
+    .features {
+      background: var(--bg);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #EAF3FF;
+      color: var(--blue);
+      border-radius: 14px;
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .feature-card h3 {
+      color: var(--navy);
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* =========================
+       CTA
+    ========================== */
+    .cta {
+      padding-top: 20px;
+    }
+
+    .cta-box {
+      max-width: 1200px;
+      margin: auto;
+      border-radius: 28px;
+      background: var(--navy);
+      color: white;
+      padding: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .cta-box::after {
+      content: "";
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: rgba(8, 109, 220, 0.2);
+      right: -100px;
+      bottom: -160px;
+    }
+
+    .cta-box h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.05;
+      margin-bottom: 10px;
+    }
+
+    .cta-box p {
+      color: #B9C5D7;
+      max-width: 560px;
+    }
+
+    .cta-box .btn {
+      position: relative;
+      z-index: 2;
+      flex-shrink: 0;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+    footer {
+      background: #07172B;
+      color: white;
+      margin-top: 80px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 58px 24px 25px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 50px;
+      padding-bottom: 45px;
+    }
+
+    .footer-brand img {
+      width: 165px;
+      height: 75px;
+      object-fit: contain;
+      margin-bottom: 15px;
+    }
+
+    .footer-brand p {
+      max-width: 370px;
+      color: #9DABC0;
+      font-size: 14px;
+    }
+
+    .footer-col h4 {
+      font-size: 13px;
+      margin-bottom: 15px;
+      color: white;
+    }
+
+    .footer-col a {
+      display: block;
+      color: #9DABC0;
+      font-size: 13px;
+      margin: 8px 0;
+    }
+
+    .footer-col a:hover {
+      color: var(--yellow);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: #77869C;
+      font-size: 12px;
+    }
+
+    /* =========================
+       MOBILE NAV
+    ========================== */
+    .mobile-menu {
+      display: none;
+      padding: 0 24px 20px;
+      background: white;
+    }
+
+    .mobile-menu.open {
+      display: block;
+    }
+
+    .mobile-menu a {
+      display: block;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--border);
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+    @media (max-width: 980px) {
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        padding-top: 65px;
+      }
+
+      .hero-logo-card {
+        min-height: 300px;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .nav-links,
+      .nav-cta {
+        display: none;
+      }
+
+      .mobile-toggle {
+        display: block;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .nav-inner {
+        min-height: 76px;
+        padding: 8px 18px;
+      }
+
+      .brand img {
+        width: 135px;
+        height: 55px;
+      }
+
+      .hero-inner {
+        padding: 55px 18px;
+        gap: 35px;
+      }
+
+      .hero h1 {
+        letter-spacing: -2px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      .hero-logo-card {
+        min-height: 250px;
+        border-radius: 24px;
+        padding: 25px;
+      }
+
+      section {
+        padding: 65px 18px;
+      }
+
+      .section-heading {
+        display: block;
+      }
+
+      .section-heading p {
+        margin-top: 12px;
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .product-image {
+        aspect-ratio: 2 / 3;
+      }
+
+      .cta-box {
+        margin: 0 18px;
+        padding: 35px 25px;
+        display: block;
+      }
+
+      .cta-box .btn {
+        margin-top: 22px;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       NAVBAR
+  ========================== -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="#" class="brand" aria-label="SnackCorner88 Home">
+        <img
+          src="/assets/brand/snackcorner88-logo.png"
+          alt="SnackCorner88 official logo"
+          loading="eager"
+        >
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#products">Products</a>
+        <a href="#why-us">Why Us</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <a class="nav-cta" href="products.html">Shop Snacks</a>
+
+      <button
+        class="mobile-toggle"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        onclick="toggleMobileMenu()"
+      >
+        ☰
+      </button>
+    </div>
+
+    <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile navigation">
+      <a href="#home" onclick="closeMobileMenu()">Home</a>
+      <a href="#products" onclick="closeMobileMenu()">Products</a>
+      <a href="#why-us" onclick="closeMobileMenu()">Why Us</a>
+      <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- =========================
+         HERO
+    ========================== -->
+    <section class="hero" id="home">
+      <div class="hero-inner">
+        <div>
+          <div class="eyebrow">Your favorite snacks, one corner</div>
+
+          <h1>
+            Snack time made
+            <span>better.</span>
+          </h1>
+
+          <p>
+            Discover sweet, crunchy, refreshing, and fun snacks curated
+            by SnackCorner88. Find your next favorite treat and shop
+            directly through our marketplace stores.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#products" class="btn btn-primary">Explore Products</a>
+            <a href="#why-us" class="btn btn-secondary">Why SnackCorner88?</a>
+          </div>
+        </div>
+
+        <div class="hero-logo-card">
+          <img
+            src="/assets/brand/snackcorner88-logo.png"
+            alt="SnackCorner88"
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         PRODUCTS
+    ========================== -->
+    <section class="products" id="products">
+      <div class="section-inner">
+
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">Our Products</div>
+            <h2>Explore our snacks.</h2>
+          </div>
+
+          <div class="section-heading-actions">
+            <p>
+              Take a look at some of our favorite snacks and discover
+              something delicious for your next moment.
+            </p>
+            <a class="view-all-link" href="products.html" aria-label="View all products">
+              <span>View All</span>
+              <span class="arrow-icon" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+<div class="product-preview-section">
+          <div class="product-grid" id="productGrid">
+
+          <!-- PRODUCT PREVIEW 01 -->
+          <article class="product-card" data-category="sweet">
+
+            <a class="product-card-link" href="product.html?slug=sweet-snack-collection" aria-label="Lihat detail Sweet Snack Collection">
+              <div class="product-image">
+                <img src="/assets/products/dancingpop.png" alt="Sweet Snack Collection" loading="lazy">
+              </div>
+
+              <h3>Dancing Pop</h3>
+              <p>Enjoy the fun sensation of Dancing Pop Candy! A colorful and exciting popping candy snack with a playful taste, perfect for kids, teens, and candy lovers.</p>
+            </a>
+
+            <div class="product-footer">
+              <span class="product-status status-available">Available</span>
+
+              <div class="marketplace-links">
+                <a class="marketplace shopee"
+                   href="https://shopee.co.id/product/1855086980/50664843376/"
+                   target="_blank"
+                   rel="noopener"
+                   aria-label="Shop Sweet Snack Collection on Shopee">
+                  <img src="/assets/brand/shopee-logo.png" alt="Shopee">
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- PRODUCT PREVIEW 02 -->
+          <article class="product-card" data-category="crunchy">
+            <a class="product-card-link" href="product.html?slug=crunchy-bites" aria-label="Lihat detail Crunchy Bites">
+              <div class="product-image">
+                <img src="/assets/products/bebecoin.png" alt="Sweet Snack Collection" loading="lazy">
+              </div>
+
+              <h3>BeBe Chocolate Coin</h3>
+              <p>Enjoy BeBe Chocolate Coin, a fun and delicious chocolate candy with a playful coin-shaped design. Perfect for snacking, sharing, and sweet treats.</p>
+            </a>
+
+            <div class="product-footer">
+              <span class="product-status status-available">Available</span>
+
+              <div class="marketplace-links">
+                <a class="marketplace shopee"
+                   href="https://shopee.co.id/product/1855086980/52464828681/"
+                   target="_blank"
+                   rel="noopener"
+                   aria-label="Shop on Shopee">
+                  <img src="/assets/brand/shopee-logo.png" alt="Shopee">
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- PRODUCT PREVIEW 03 -->
+          <article class="product-card" data-category="refreshing">
+            <a class="product-card-link" href="products.html" aria-label="Lihat detail Refreshing Treat">
+              <div class="product-image">
+                <img src="/assets/products/miejago.png" alt="Sweet Snack Collection" loading="lazy">
+              </div>
+
+              <h3>Mie Instan Jago Mie</h3>
+              <p>Enjoy Jago Mie Instant Noodles, a quick and delicious noodle snack that's easy to prepare and perfect for a satisfying meal anytime.</p>
+            </a>
+
+            <div class="product-footer">
+              <span class="product-status status-available">Available</span>
+
+              <div class="marketplace-links">
+                <a class="marketplace shopee"
+                   href="https://shopee.co.id/product/1855086980/56265150523/"
+                   target="_blank"
+                   rel="noopener"
+                   aria-label="Shop on Shopee">
+                  <img src="/assets/brand/shopee-logo.png" alt="Shopee">
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- PRODUCT PREVIEW 04 -->
+          <article class="product-card" data-category="new">
+
+            <a class="product-card-link" href="product.html?slug=limited-snack-drop" aria-label="Lihat detail Limited Snack Drop">
+              <div class="product-image">
+                <img src="/assets/products/zippymini.png" alt="Sweet Snack Collection" loading="lazy">
+              </div>
+
+              <h3>Zippy Mini Manis</h3>
+              <p>Enjoy Zippy Mini Manis, a sweet and fun mini candy snack that's perfect for everyday snacking, sharing, and satisfying your sweet cravings.</p>
+            </a>
+
+            <div class="product-footer">
+              <span class="product-status status-available">Available</span>
+
+              <div class="marketplace-links">
+                <a class="marketplace shopee"
+                   href="#"
+                   target="_blank"
+                   rel="noopener"
+                   aria-label="Shop on Shopee">
+                  <img src="/assets/brand/shopee-logo.png" alt="Shopee">
+                </a>
+              </div>
+            </div>
+          </article>
+
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         WHY US
+    ========================== -->
+    <section class="features" id="why-us">
+      <div class="section-inner">
+
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">Why SnackCorner88</div>
+            <h2>Made for every snack moment.</h2>
+          </div>
+
+          <p>
+            A simple, modern shopping experience built around the things
+            snack lovers actually care about.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+
+          <div class="feature-card">
+            <div class="feature-icon">01</div>
+            <h3>Curated Snacks</h3>
+            <p>
+              A carefully selected range of sweet, crunchy, refreshing,
+              and fun snacks.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">02</div>
+            <h3>Easy Marketplace Shopping</h3>
+            <p>
+              Jump directly to our official marketplace listings through
+              Shopee and TikTok Shop.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">03</div>
+            <h3>Clear Availability</h3>
+            <p>
+              Easily identify new arrivals and unavailable products without
+              displaying private stock quantities.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         CTA
+    ========================== -->
+    <section class="cta" id="contact">
+      <div class="cta-box">
+        <div>
+          <h2>Ready for your next snack?</h2>
+          <p>
+            Explore the SnackCorner88 collection and find something
+            delicious for your next moment.
+          </p>
+        </div>
+
+        <a href="#products" class="btn btn-primary">
+          Browse Products
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+  <footer>
+    <div class="footer-inner">
+
+      <div class="footer-top">
+
+        <div class="footer-brand">
+          <img
+            src="/assets/brand/snackcorner88-logo.png"
+            alt="SnackCorner88 official logo"
+          >
+
+          <p>
+            Your favorite snacks, sweets, and treats.
+            Discover something delicious at SnackCorner88.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <a href="#home">Home</a>
+          <a href="#products">Products</a>
+          <a href="#why-us">Why Us</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Marketplace</h4>
+          <a href="#" target="_blank" rel="noopener">Shopee</a>
+          <a href="#" target="_blank" rel="noopener">TikTok Shop</a>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 SnackCorner88. All rights reserved.</span>
+        <span>Your Favorite Snacks.</span>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById("mobileMenu");
+      const button = document.querySelector(".mobile-toggle");
+      const isOpen = menu.classList.toggle("open");
+
+      button.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    }
+
+    function closeMobileMenu() {
+      const menu = document.getElementById("mobileMenu");
+      const button = document.querySelector(".mobile-toggle");
+
+      menu.classList.remove("open");
+      button.setAttribute("aria-expanded", "false");
+    }
+
+    // Product previews on the homepage intentionally show only a selection.
+    // The complete catalogue is available on products.html.
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Semua Produk — SnackCorner88</title>
+  <meta name="description" content="Discover sweet, crunchy, refreshing, and fun snacks curated
+            by SnackCorner88. Find your next favorite treat and shop
+            directly through our marketplace stores.">
+
+  <link rel="icon" type="image/png" href="/assets/brand/snackcorner88-logo.png">
+  <link rel="apple-touch-icon" href="/assets/brand/snackcorner88-logo.png">
+
+  <style>
+    :root {
+      --blue: #086DDC;
+      --blue-dark: #0755aa;
+      --yellow: #FBD122;
+      --navy: #0B1F3A;
+      --text: #172033;
+      --muted: #687386;
+      --bg: #F8FAFC;
+      --white: #FFFFFF;
+      --border: #E8EDF4;
+      --success: #168A55;
+      --danger: #D94848;
+      --shadow: 0 12px 35px rgba(11, 31, 58, 0.08);
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+
+    /* NAVBAR (matches index.html) */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(232, 237, 244, 0.9);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      min-height: 88px;
+      margin: auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand img {
+      display: block;
+      width: 165px;
+      height: 64px;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover { color: var(--blue); }
+    .nav-links a.active { color: var(--blue); }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: var(--navy);
+      color: white;
+      font-size: 13px;
+      font-weight: 800;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav-cta:hover { background: var(--blue); transform: translateY(-2px); }
+
+    .mobile-toggle {
+      display: none;
+      border: 0;
+      background: var(--navy);
+      color: white;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    .mobile-menu {
+      display: none;
+      padding: 0 24px 20px;
+      background: white;
+    }
+
+    .mobile-menu.open { display: block; }
+
+    .mobile-menu a {
+      display: block;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--border);
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    @media (max-width: 980px) {
+      .nav-links, .nav-cta { display: none; }
+      .mobile-toggle { display: block; }
+    }
+
+    /* PAGE HEADER */
+    .page-header {
+      max-width: 1200px;
+      margin: auto;
+      padding: 50px 24px 10px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: #EAF3FF;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--yellow);
+    }
+
+    .page-header h1 {
+      color: var(--navy);
+      font-size: clamp(32px, 5vw, 50px);
+      letter-spacing: -2px;
+      margin-bottom: 12px;
+    }
+
+    .page-header p {
+      max-width: 560px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* CATALOG */
+    .catalog {
+      max-width: 1200px;
+      margin: auto;
+      padding: 30px 24px 100px;
+    }
+
+    .filter-row {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 30px;
+    }
+
+    .filter {
+      white-space: nowrap;
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 750;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .filter.active,
+    .filter:hover {
+      background: var(--navy);
+      color: white;
+      border-color: var(--navy);
+    }
+
+    .result-count {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .product-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .product-image {
+      aspect-ratio: 1 / 1;
+      border-radius: 15px;
+      background: linear-gradient(145deg, #edf5ff, #fff8d9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--navy);
+      font-weight: 900;
+      font-size: 15px;
+      margin-bottom: 15px;
+      text-align: center;
+      padding: 10px;
+      overflow: hidden;
+    }
+
+    .product-image span { opacity: 0.55; }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+    }
+
+    .badge {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      z-index: 2;
+      padding: 6px 9px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-new { background: var(--yellow); color: var(--navy); }
+    .badge-out { background: #FDEAEA; color: var(--danger); }
+
+    .product-card-link {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .product-card-link:hover h3 { color: var(--blue); }
+
+    .product-card h3 {
+      font-size: 16px;
+      color: var(--navy);
+      margin-bottom: 5px;
+    }
+
+    .product-card p {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .marketplace-links { display: flex; gap: 7px; }
+
+    .marketplace {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: white;
+      border: 1px solid var(--border);
+      padding: 6px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .marketplace:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(11, 31, 58, 0.12);
+    }
+
+    .marketplace img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .product-status { font-size: 11px; font-weight: 800; }
+    .status-available { color: var(--success); }
+    .status-out { color: var(--danger); }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+    }
+
+    /* FOOTER */
+    footer {
+      background: #07172B;
+      color: white;
+      margin-top: 40px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      color: #9DABC0;
+      font-size: 13px;
+    }
+
+    @media (max-width: 980px) {
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 620px) {
+      .product-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="brand" aria-label="SnackCorner88 Home">
+        <img src="/assets/brand/snackcorner88-logo.png" alt="SnackCorner88 official logo" loading="eager">
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html#home">Home</a>
+        <a href="products.html" class="active">Products</a>
+        <a href="index.html#why-us">Why Us</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+
+      <a class="nav-cta" href="#catalog">Shop Snacks</a>
+
+      <button class="mobile-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" onclick="toggleMobileMenu()">☰</button>
+    </div>
+
+    <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile navigation">
+      <a href="index.html#home">Home</a>
+      <a href="products.html">Products</a>
+      <a href="index.html#why-us">Why Us</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="page-header">
+    <div class="eyebrow">All Products</div>
+    <h1>SnackCorner88 Products</h1>
+    <p>Discover sweet, crunchy, refreshing, and fun snacks curated
+            by SnackCorner88. Find your next favorite treat and shop
+            directly through our marketplace stores.</p>
+  </div>
+
+  <main class="catalog" id="catalog">
+    <div class="filter-row" id="filterRow"></div>
+    <div class="result-count" id="resultCount"></div>
+    <div class="product-grid" id="productGrid"></div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>© 2026 SnackCorner88. All rights reserved.</span>
+      <a href="index.html">Back to Home</a>
+    </div>
+  </footer>
+
+  <!-- Data produk terpusat (sama dengan yang dipakai product.html) -->
+  <script src="/assets/js/products-data.js"></script>
+
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById("mobileMenu");
+      const button = document.querySelector(".mobile-toggle");
+      const isOpen = menu.classList.toggle("open");
+      button.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    }
+
+    const CATEGORY_LABELS = {
+      all: "All Products",
+      chocolate: "Chocolate",
+      candy: "Candy",
+      instantfood: "Instant Food",
+      savory:"Savory"
+    };
+
+    let activeCategory = "all";
+
+    function productCardHtml(slug, product) {
+      const badgeHtml = product.badge === "new"
+        ? '<span class="badge badge-new">New Stock</span>'
+        : product.badge === "out"
+          ? '<span class="badge badge-out">Out of Stock</span>'
+          : "";
+
+      const imageHtml = product.image
+        ? `<img src="${product.image}" alt="${product.name}" loading="lazy">`
+        : `<span>PRODUCT IMAGE</span>`;
+
+      const statusHtml = product.available
+        ? '<span class="product-status status-available">Available</span>'
+        : '<span class="product-status status-out">Out of Stock</span>';
+
+      const shopeeHref = product.shopeeUrl || "#";
+
+      return `
+        <article class="product-card" data-category="${product.category}">
+          ${badgeHtml}
+
+          <a class="product-card-link" href="product.html?slug=${slug}" aria-label="Lihat detail ${product.name}">
+            <div class="product-image">${imageHtml}</div>
+            <h3>${product.name}</h3>
+            <p>${product.shortDescription}</p>
+          </a>
+
+          <div class="product-footer">
+            ${statusHtml}
+            <div class="marketplace-links">
+              <a class="marketplace shopee"
+                 href="${shopeeHref}"
+                 target="_blank"
+                 rel="noopener"
+                 aria-label="Shop ${product.name} on Shopee">
+                <img src="/assets/brand/shopee-logo.png" alt="Shopee">
+              </a>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderFilters() {
+      const categories = new Set(["all"]);
+      Object.values(PRODUCTS).forEach(p => categories.add(p.category));
+
+      const filterRow = document.getElementById("filterRow");
+      filterRow.innerHTML = Array.from(categories)
+        .map(cat => `
+          <button class="filter ${cat === activeCategory ? "active" : ""}" data-filter="${cat}">
+            ${CATEGORY_LABELS[cat] || cat}
+          </button>
+        `)
+        .join("");
+
+      filterRow.querySelectorAll(".filter").forEach(btn => {
+        btn.addEventListener("click", () => {
+          activeCategory = btn.dataset.filter;
+          renderFilters();
+          renderGrid();
+        });
+      });
+    }
+
+    function renderGrid() {
+      const grid = document.getElementById("productGrid");
+      const resultCount = document.getElementById("resultCount");
+
+      const entries = Object.entries(PRODUCTS).filter(([, product]) =>
+        activeCategory === "all" || product.category === activeCategory
+      );
+
+      resultCount.textContent = `${entries.length} produk ditemukan`;
+
+      grid.innerHTML = entries.length
+        ? entries.map(([slug, product]) => productCardHtml(slug, product)).join("")
+        : `<div class="empty-state">Belum ada produk di kategori ini.</div>`;
+    }
+
+    renderFilters();
+    renderGrid();
+  </script>
+
+</body>
+</html>
