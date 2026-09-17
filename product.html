@@ -464,13 +464,13 @@
       const breadcrumbCurrent = document.getElementById("breadcrumbCurrent");
 
       if (!product) {
-        document.title = "Produk Tidak Ditemukan — SnackCorner88";
-        breadcrumbCurrent.textContent = "Produk Tidak Ditemukan";
+        document.title = "Product Not Found — SnackCorner88";
+        breadcrumbCurrent.textContent = "Product Not Found";
         root.innerHTML = `
           <div class="not-found">
-            <h1>Produk tidak ditemukan</h1>
-            <p>Sepertinya link produk ini tidak valid atau sudah tidak tersedia.</p>
-            <a class="btn btn-secondary" href="products.html">Lihat Semua Produk</a>
+            <h1>Product Not Found</h1>
+            <p>It looks like this product link is invalid or is no longer available.</p>
+            <a class="btn btn-secondary" href="products.html">See Products</a>
           </div>
         `;
         return;
